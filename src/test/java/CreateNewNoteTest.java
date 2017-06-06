@@ -6,6 +6,8 @@ import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import support.AppHelper;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -13,16 +15,17 @@ import org.junit.runner.RunWith;
         glue = {"steps"},
         format = {"json:target/issuing_company_invoice_cucumber.json", "html:target/site/issuing/cucumber-pretty"}
 )
-public class CreateNewNoteTest {
+public class CreateNewNoteTest extends AppHelper {
     @BeforeClass
     public static void setUp() throws Exception {
-        System.out.println("123");
-        AppSetup.prepareSealNoteForAppium();
+        System.out.println("strat-------");
+        sealNoteSetup();
+        driver.findElement(By.id("password_meter_input")).sendKeys("123456");
+        driver.findElement(By.id("password_action_button")).click();
     }
 
     @AfterClass
     public static void tearDown() {
-        System.out.println("000");
-        AppSetup.driver.quit();
+        closeSealnote();
     }
 }
