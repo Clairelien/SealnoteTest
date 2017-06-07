@@ -26,7 +26,7 @@ public class AppHelper {
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("platformVersion", "7.0");
         capabilities.setCapability("deviceName", "emulator-5554");
-//        capabilities.setCapability("app", "C:/Users/Claire/Desktop/AppiumDemo/apps/Sealnote-debug.apk");
+//        capabilities.setCapability("app", System.getProperty("user.dir")+"\\apps\\Sealnote-debug.apk");
         capabilities.setCapability("appPackage", "com.twistedplane.sealnote");
         capabilities.setCapability("appActivity", "com.twistedplane.sealnote.SealnoteActivity");
 //        capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
