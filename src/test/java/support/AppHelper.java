@@ -2,7 +2,9 @@ package support; /**
  * Created by Claire on 2017/6/2.
  */
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 //import io.appium.java_client.android.Activity;
 
@@ -14,7 +16,7 @@ public class AppHelper {
     public static AppiumDriverLocalService service;
 
     public static void sealNoteSetup() throws MalformedURLException {
-
+        System.out.println("strat-------");
         // start appium server
         service = AppiumDriverLocalService.buildDefaultService();
         service.start();
@@ -33,8 +35,13 @@ public class AppHelper {
         driver.launchApp();
     }
 
+    public static void loginToSealnote() {
+        driver.findElement(By.id("password_meter_input")).sendKeys("123456");
+        driver.findElement(By.id("password_action_button")).click();
+    }
+
     public static void closeSealnote() {
-        driver.quit();
+//        driver.quit();
         service.stop();
         System.out.println("end-------");
     }
