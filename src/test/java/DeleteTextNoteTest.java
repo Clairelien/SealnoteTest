@@ -1,6 +1,3 @@
-/**
- * Created by Claire on 2017/6/7.
- */
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
@@ -8,16 +5,19 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import support.AppHelper;
 
+/**
+ * Created by Claire on 2017/6/12.
+ */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/features/createNewCardNote.feature",
+        features = "src/test/features/deleteTextNote.feature",
         glue = {"steps"},
-        format = {"json:target/CreateNewCardNote.json", "html:target/site/createCard/cucumber-pretty"}
+        format = {"json:target/DeleteTextNote.json", "html:target/site/deleteText/cucumber-pretty"}
 )
-public class CreateNewCardNoteTest extends AppHelper {
+public class DeleteTextNoteTest extends AppHelper {
     @BeforeClass
     public static void setUp() throws Exception {
-        sealNoteSetup();
+        sealNoteSetupNoRest();
         loginToSealnote() ;
     }
 

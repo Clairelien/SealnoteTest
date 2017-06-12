@@ -34,12 +34,12 @@ public class CreateNewTextNoteStepDef implements En{
 
         Then("^there is a new text note which the title is \"([^\"]*)\", and the content is \"([^\"]*)\" in the sealnote$", (String title, String content) -> {
 
-            //By note = By.xpath("//android.widget.FrameLayout[@resource-id='com.twistedplane.sealnote:id/fragment_container']//android.widget.AbsListView[1]//android.widget.TextView[@resource-id='com.twistedplane.sealnote:id/card_header_inner_simple_title']") ;
-            String actualTitle = AppHelper.driver.findElement(By.id("card_header_inner_simple_title")).getText() ;
-            String actualContent = AppHelper.driver.findElement(By.id("cardcontent_note")).getText() ;
-            assertThat(actualTitle, is(title));
-            assertThat(actualContent, is(content));
-
+            if ( AppHelper.driver.findElement(By.id("card_header_inner_simple_title")).isDisplayed() ) {
+                String actualTitle = AppHelper.driver.findElement(By.id("card_header_inner_simple_title")).getText();
+                String actualContent = AppHelper.driver.findElement(By.id("cardcontent_note")).getText();
+                assertThat(actualTitle, is(title));
+                assertThat(actualContent, is(content));
+            }
         });
 
     }
