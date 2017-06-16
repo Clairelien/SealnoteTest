@@ -3,22 +3,28 @@ import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import support.AppHelper;
 
+import java.util.concurrent.TimeUnit;
+
 /**
- * Created by Claire on 2017/6/12.
+ * Created by Claire on 2017/6/16.
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/features/deleteTextNote.feature",
+        features = "src/test/features/deleteTag.feature",
         glue = {"steps"},
-        format = {"json:target/DeleteTextNote.json", "html:target/site/deleteText/cucumber-pretty"}
+        format = {"json:target/DeleteTag.json", "html:target/site/deleteTag/cucumber-pretty"}
 )
-public class DeleteTextNoteTest extends AppHelper {
+public class DeleteTagTest extends AppHelper {
+
     @BeforeClass
     public static void setUp() throws Exception {
-        sealNoteSetupNoRest();
+        sealNoteSetup();
         loginToSealnote() ;
+        AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        addBeforeDelete() ;
     }
 
     @AfterClass

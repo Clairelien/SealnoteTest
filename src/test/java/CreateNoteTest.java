@@ -10,11 +10,11 @@ import support.AppHelper;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/features/createNewTextNote.feature",
+        features = "src/test/features/createNote.feature",
         glue = {"steps"},
-        format = {"json:target/CreateNewTextNote.json", "html:target/site/createText/cucumber-pretty"}
+        format = {"json:target/CreateNote.json", "html:target/site/createNote/cucumber-pretty"}
 )
-public class CreateNewTextNoteTest extends AppHelper {
+public class CreateNoteTest extends AppHelper {
     @BeforeClass
     public static void setUp() throws Exception {
         sealNoteSetup();

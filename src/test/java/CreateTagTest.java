@@ -3,6 +3,7 @@ import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import support.AppHelper;
 
 /**
@@ -10,11 +11,12 @@ import support.AppHelper;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/features/createNewLoginNote.feature",
+        features = "src/test/features/createTag.feature",
         glue = {"steps"},
-        format = {"json:target/CreateNewLoginNote.json", "html:target/site/createLogin/cucumber-pretty"}
+        format = {"json:target/CreateTag.json", "html:target/site/createTag/cucumber-pretty"}
 )
-public class CreateNewLoginNoteTest extends AppHelper {
+@Suite.SuiteClasses({CreateNoteTest.class, CreateTagTest.class})
+public class CreateTagTest extends AppHelper {
     @BeforeClass
     public static void setUp() throws Exception {
         sealNoteSetup();
