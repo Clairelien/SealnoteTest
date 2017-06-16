@@ -24,6 +24,11 @@ public class CreateNoteStepDef implements En{
             AppHelper.driver.findElement(By.xpath("//android.widget.ListView[1]//android.widget.TextView")).click();
         });
 
+        Given("^user want to new a empty text note$", () -> {
+            AppHelper.driver.findElement(By.id("action_new_note")).click();
+            AppHelper.driver.findElement(By.xpath("//android.widget.ListView[1]//android.widget.TextView")).click();
+        });
+
         Given("^user want to new a card note$", () -> {
             AppHelper.driver.findElement(By.id("action_new_note")).click();
             AppHelper.driver.findElement(By.xpath("//android.widget.ListView//android.widget.LinearLayout[@index='1']//android.widget.TextView")).click();
@@ -37,6 +42,9 @@ public class CreateNoteStepDef implements En{
         And("^user is editing a new note which the title is \"([^\"]*)\", and the content is \"([^\"]*)\"$", (String title, String content) -> {
             AppHelper.driver.findElement(By.id("note_activity_title")).sendKeys(title);
             AppHelper.driver.findElement(By.id("note_activity_note")).sendKeys(content);
+//            AppHelper.driver.findElementById("action_color").click();
+//            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//            AppHelper.driver.findElementByXPath("//android.widget.GridView/android.widget.FrameLayout[@index='1']").click();
         });
 
         And("^user is editing a new card which the title is \"([^\"]*)\", the name is \"([^\"]*)\", the card number \"([^\"]*)\", valid from \"([^\"]*)\" to \"([^\"]*)\" and cvv is \"([^\"]*)\"$", (String title, String name, String number, String startDate, String endDate, String cvv) -> {
@@ -55,46 +63,25 @@ public class CreateNoteStepDef implements En{
         });
 
         When("^user submit the note$", () -> {
-            throw new PendingException();
-//            AppHelper.driver.findElement(By.id("action_save_note")).click();
+            AppHelper.driver.findElement(By.id("action_save_note")).click();
         });
 
         Then("^there is a new text note which the title is \"([^\"]*)\", and the content is \"([^\"]*)\" in the sealnote$", (String title, String content) -> {
-            throw new PendingException();
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            AppHelper.driver.findElementById("list_cardId").click();
-////
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            AppHelper.driver.findElement(By.id("note_activity_title")).sendKeys(title+"123");
-//            String actualTitle = AppHelper.driver.findElement(By.).getText();
-//            WebElement titleEle = AppHelper.driver.findElementByXPath("//android.widget.EditText[@resource-id='note_activity_title']");//findElement(By.id("note_activity_title"));
-//            WebElement contentEle = AppHelper.driver.findElement(By.id("note_activity_note"));
-//            String actualTitle = titleEle.getAttribute("text");
-//            String actualContent = contentEle.getText();
-//            assertThat(actualTitle, is(title));
-//            assertThat(actualContent, is(content));
-//            AppHelper.driver.findElementByXPath("//android.widget.AbsListView[@resource-id='notes_view']/android.widget.LinearLayout[@index='0']").click();
-//            if ( AppHelper.driver.findElement(By.id("card_header_inner_simple_title")).isDisplayed() ) {
-//                String actualTitle = AppHelper.driver.findElement(By.xpath("//android.widget.AbsListView[@resource-id='notes_view'][1]//android.widget.TextView[resource-id='card_header_inner_simple_title']")).getText();
-////                String actualTitle = AppHelper.driver.findElement(By.id("card_header_inner_simple_title")).getText();
-//                String actualContent = AppHelper.driver.findElement(By.id("cardcontent_note")).getText();
-//                assertThat(actualTitle, is(title));
-//                assertThat(actualContent, is(content));
-//            }
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            assertThat( AppHelper.driver.findElementById("card_header_inner_simple_title").getText(), is(title)) ;
+            assertThat( AppHelper.driver.findElementById("cardcontent_note").getText(), is(content)) ;
+        });
+
+        Then("^there is no new text note in the sealnote$", () -> {
+
         });
 
         Then("^there is a new note which the title is \"([^\"]*)\", the name is \"([^\"]*)\", the card number \"([^\"]*)\", valid from \"([^\"]*)\" to \"([^\"]*)\" and cvv is \"([^\"]*)\" in the sealnote$", (String title, String name, String number, String startDate, String endDate, String cvv) -> {
-            throw new PendingException();
-//            AppHelper.driver.findElement(By.id("card_main_layout")).click();
-////            String actualTitle = AppHelper.driver.findElement(By.id("note_activity_title")).getText() ;
+
+            AppHelper.driver.findElement(By.id("card_main_layout")).click();
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            assertThat(AppHelper.driver.findElement(By.xpath("//android.widget.EditText[@text='my card' and @index='0' and @resource-id='note_card_name']")).getAttribute("text"), is(name));
+//            String actualTitle = AppHelper.driver.findElement(By.id("note_activity_title")).getText() ;
 //            String actualName = AppHelper.driver.findElement(By.id("note_card_name")).getText() ;
 //            String actualNumber = AppHelper.driver.findElement(By.id("note_card_number")).getText() ;
 //            String actualStartDate = AppHelper.driver.findElement(By.id("note_card_valid_from")).getText() ;
@@ -109,9 +96,12 @@ public class CreateNoteStepDef implements En{
         });
 
         Then("^there is a new login note which the url is \"([^\"]*)\", the login account is \"([^\"]*)\" and the password is \"([^\"]*)\" in the sealnote$", (String url, String acc, String pwd) -> {
-            // Write code here that turns the phrase above into concrete actions
-            throw new PendingException();
+            AppHelper.driver.findElement(By.id("card_main_layout")).click();
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            assertThat(AppHelper.driver.findElement(By.id("note_login_url")).getText(), is(url));
         });
+
+
 
     }
 }

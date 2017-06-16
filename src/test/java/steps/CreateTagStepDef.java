@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
  * Created by Claire on 2017/6/12.
  */
 public class CreateTagStepDef implements En {
-    TouchAction action = new TouchAction(AppHelper.driver);
+
     public CreateTagStepDef() {
         Given("^user want to add a new tag named \"([^\"]*)\" in the text note$", ( String tag ) -> {
             AppHelper.driver.findElement(By.id("action_new_note")).click();
@@ -31,12 +31,9 @@ public class CreateTagStepDef implements En {
         Then("^user can see the new tag \"([^\"]*)\" in the tag list$", ( String tag ) -> {
             AppHelper.driver.findElement(By.xpath("//android.widget.ImageButton[@content-desc='More options']")).click();
             AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Edit tags']")).click();
-            WebElement tagText = AppHelper.driver.findElementById("text1") ;
-            String str = tagText.getAttribute("text") ;
-            System.out.println(str+"*****");
-            assertThat(str, is(tag)); ;
-//            action.press(tagText).release().perform() ;
-//            AppHelper.driver.findElement(By.xpath("//android.widget.ListView[@resource-id='list']/android.widget.RelativeLayout[@index='0']//android.widget.TextView[@resource-id='text1']")).getText() ;
+            WebElement tagText = AppHelper.driver.findElementByXPath("//android.widget.TextView[@text='"+ tag +"']") ;
+            assertThat(tagText.getAttribute("text"), is(tag));
+            AppHelper.driver.findElementById("home").click();
         });
     }
 }

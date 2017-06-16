@@ -3,7 +3,6 @@ package steps;
 import cucumber.api.java8.En;
 import org.openqa.selenium.By;
 import support.AppHelper;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 /**
@@ -20,8 +19,9 @@ public class DeleteTagStepDef implements En {
             AppHelper.driver.findElementById("button1").click();
         });
         Then("^there is no tag \"([^\"]*)\" in the tag list$", (String tag) -> {
-            String str = AppHelper.driver.findElementByXPath("//android.widget.TextView[@Text='No tags found!']").getText() ;
-            assertThat(str, is("No tags found!")) ;
+//            assertThat(AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='"+tag+"']")).isDisplayed(), is(false)) ;
+//            String str = AppHelper.driver.findElementByXPath("//android.widget.TextView[@Text='No tags found!']").getText() ;
+//            assertThat(str, is("No tags found!")) ;
         });
     }
 }

@@ -5,5 +5,8 @@ Feature: create new tag in text note
     When user save the text note
     Then user can see the new tag <tag> in the tag list
     Examples:
-    | tag |
-    |  "yoyo"   |
+    |           tag            |
+    |         "yoyo"          |
+    |    "中文中文喔喔喔"     |
+    |    "/*--***/%$%^#&"    |
+#    |           ""             |

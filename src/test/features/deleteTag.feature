@@ -1,4 +1,4 @@
-Feature: create new tag in text note
+Feature: delete tag
 
   Scenario Outline: successful delete tag
     Given user want to delete the tag named <tag>
