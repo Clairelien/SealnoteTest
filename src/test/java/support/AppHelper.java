@@ -32,7 +32,7 @@ public class AppHelper {
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("platformVersion", "6.0");
         capabilities.setCapability("deviceName", "emulator-5554"); // emulator-5554
-        capabilities.setCapability("app", System.getProperty("user.dir")+"\\apps\\Sealnote-debug.apk");
+//        capabilities.setCapability("app", System.getProperty("user.dir")+"\\apps\\Sealnote-debug.apk");
         capabilities.setCapability("appPackage", "com.twistedplane.sealnote");
         capabilities.setCapability("appActivity", "com.twistedplane.sealnote.SealnoteActivity");
         capabilities.setCapability("unicodeKeyboard", "True");

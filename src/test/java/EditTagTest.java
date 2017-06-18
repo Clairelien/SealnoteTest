@@ -22,8 +22,7 @@ public class EditTagTest extends AppHelper{
     public static void setUp() throws Exception {
         sealNoteSetup();
         loginToSealnote() ;
-        AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        addBeforeDelete() ;
+
     }
 
 //    @Before

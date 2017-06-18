@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java8.En;
 import io.appium.java_client.TouchAction;
 import org.openqa.selenium.By;
@@ -16,23 +17,71 @@ import static org.junit.Assert.assertThat;
 public class DeleteNoteStepDef implements En {
     TouchAction action = new TouchAction(AppHelper.driver);
     public DeleteNoteStepDef() {
-        Given("^user select the latest text note$", () -> {
-//            AppHelper.driver.findElementById("home").click();
-            action.longPress( AppHelper.driver.findElementById("card_main_layout") ).release().perform() ;
-        });
-        When("^user delete this note$", () -> {
+
+        Given("^user create two text note$", () -> {
+            AppHelper.driver.findElement(By.id("action_new_note")).click();
+            AppHelper.driver.findElement(By.xpath("//android.widget.ListView[1]//android.widget.TextView")).click();
+
             AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            AppHelper.driver.findElement(By.id("note_activity_title")).sendKeys("test");
+            AppHelper.driver.findElement(By.id("note_activity_note")).sendKeys("hello");
+            AppHelper.driver.findElement(By.id("action_save_note")).click();
+
+            AppHelper.driver.findElement(By.id("action_new_note")).click();
+            AppHelper.driver.findElement(By.xpath("//android.widget.ListView[1]//android.widget.TextView")).click();
+
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            AppHelper.driver.findElement(By.id("note_activity_title")).sendKeys("test2");
+            AppHelper.driver.findElement(By.id("note_activity_note")).sendKeys("hello2");
+            AppHelper.driver.findElement(By.id("action_save_note")).click();
+        });
+        When("^user delete these notes in the main page$", () -> {
+            action.longPress( AppHelper.driver.findElementById("card_main_layout") ).release().perform() ;
+            AppHelper.driver.findElement(By.xpath("//android.widget.AbsListView/android.widget.LinearLayout[@index='1']")).click();
+            AppHelper.driver.findElementById("action_delete").click();
+        });
+        Then("^user can see these text notes in the trash section$", () -> {
+            AppHelper.driver.findElement(By.id("android:id/action_bar_title")).click();
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Trash']")).click();
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//            assertThat( AppHelper.driver.findElementByXPath("//android.widget.AbsListView/android.widget.LinearLayout[@index='0']//android.widget.TextView[@resource-id='card_header_inner_simple_title']").getText(), is("test2") );
+//            assertThat( AppHelper.driver.findElementByXPath("//android.widget.AbsListView/android.widget.LinearLayout[@index='1']//android.widget.TextView[@resource-id='card_header_inner_simple_title']").getText(), is("test") );
+
+            AppHelper.driver.findElement(By.id("home")).click();
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Notes']")).click();
+        });
+        Given("^user create text note$", () -> {
+            AppHelper.driver.findElement(By.id("action_new_note")).click();
+            AppHelper.driver.findElement(By.xpath("//android.widget.ListView[1]//android.widget.TextView")).click();
+
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            AppHelper.driver.findElement(By.id("note_activity_title")).sendKeys("test");
+            AppHelper.driver.findElement(By.id("note_activity_note")).sendKeys("hello");
+            AppHelper.driver.findElement(By.id("action_save_note")).click();
+        });
+        When("^user delete this note in the main page$", () -> {
+            action.longPress( AppHelper.driver.findElementById("card_main_layout") ).release().perform() ;
             AppHelper.driver.findElementById("action_delete").click();
         });
         Then("^user can see the text note in the trash section$", () -> {
-            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             AppHelper.driver.findElement(By.id("android:id/action_bar_title")).click();
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Trash']")).click();
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            assertThat( AppHelper.driver.findElementById("card_header_inner_simple_title").getText(), is("test") );
 
-            String actualTitle = AppHelper.driver.findElement(By.id("card_header_inner_simple_title")).getText() ;
-            String actualContent = AppHelper.driver.findElement(By.id("cardcontent_note")).getText() ;
-            assertThat(actualTitle, is("test"));
-            assertThat(actualContent, is("hello world"));
+            AppHelper.driver.findElement(By.id("home")).click();
+            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//            AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Notes']")).click();
+            AppHelper.driver.findElement(By.xpath("//android.widget.ListView[@resource-id='drawer_list']/android.widget.LinearLayout[@index='0']")).click();
         });
+        When("^user delete this note in the edit page$", () -> {
+            AppHelper.driver.findElementById("card_main_layout").click();
+            AppHelper.driver.findElement(By.xpath("//android.widget.ImageButton[@content-desc='More options']")).click();
+            AppHelper.driver.findElementByXPath("android.widget.TextView[@text='Delete']").click();
+        });
+
     }
 }

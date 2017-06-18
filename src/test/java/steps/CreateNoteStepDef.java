@@ -42,9 +42,6 @@ public class CreateNoteStepDef implements En{
         And("^user is editing a new note which the title is \"([^\"]*)\", and the content is \"([^\"]*)\"$", (String title, String content) -> {
             AppHelper.driver.findElement(By.id("note_activity_title")).sendKeys(title);
             AppHelper.driver.findElement(By.id("note_activity_note")).sendKeys(content);
-//            AppHelper.driver.findElementById("action_color").click();
-//            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//            AppHelper.driver.findElementByXPath("//android.widget.GridView/android.widget.FrameLayout[@index='1']").click();
         });
 
         And("^user is editing a new card which the title is \"([^\"]*)\", the name is \"([^\"]*)\", the card number \"([^\"]*)\", valid from \"([^\"]*)\" to \"([^\"]*)\" and cvv is \"([^\"]*)\"$", (String title, String name, String number, String startDate, String endDate, String cvv) -> {
@@ -72,36 +69,39 @@ public class CreateNoteStepDef implements En{
             assertThat( AppHelper.driver.findElementById("cardcontent_note").getText(), is(content)) ;
         });
 
-        Then("^there is no new text note in the sealnote$", () -> {
-
-        });
-
         Then("^there is a new note which the title is \"([^\"]*)\", the name is \"([^\"]*)\", the card number \"([^\"]*)\", valid from \"([^\"]*)\" to \"([^\"]*)\" and cvv is \"([^\"]*)\" in the sealnote$", (String title, String name, String number, String startDate, String endDate, String cvv) -> {
 
             AppHelper.driver.findElement(By.id("card_main_layout")).click();
             AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            assertThat(AppHelper.driver.findElement(By.xpath("//android.widget.EditText[@text='my card' and @index='0' and @resource-id='note_card_name']")).getAttribute("text"), is(name));
-//            String actualTitle = AppHelper.driver.findElement(By.id("note_activity_title")).getText() ;
-//            String actualName = AppHelper.driver.findElement(By.id("note_card_name")).getText() ;
-//            String actualNumber = AppHelper.driver.findElement(By.id("note_card_number")).getText() ;
-//            String actualStartDate = AppHelper.driver.findElement(By.id("note_card_valid_from")).getText() ;
-//            String actualEndDate = AppHelper.driver.findElement(By.id("note_card_valid_upto")).getText() ;
-//            String actualCvv = AppHelper.driver.findElement(By.id("note_card_cvv")).getText() ;
-////            assertThat(actualTitle, is(title)) ;
-//            assertThat(actualName, is(name)) ;
-//            assertThat(actualNumber, is(number)) ;
-//            assertThat(actualStartDate, is(startDate)) ;
-//            assertThat(actualEndDate, is(endDate)) ;
-//            assertThat(actualCvv, is(cvv)) ;
+            String actualTitle = AppHelper.driver.findElement(By.id("note_activity_title")).getText() ;
+            String actualName = AppHelper.driver.findElement(By.id("note_card_name")).getText() ;
+            String actualNumber = AppHelper.driver.findElement(By.id("note_card_number")).getText() ;
+            String actualStartDate = AppHelper.driver.findElement(By.id("note_card_valid_from")).getText() ;
+            String actualEndDate = AppHelper.driver.findElement(By.id("note_card_valid_upto")).getText() ;
+            String actualCvv = AppHelper.driver.findElement(By.id("note_card_cvv")).getText() ;
+            assertThat(actualTitle, is(title)) ;
+            assertThat(actualName, is(name)) ;
+            assertThat(actualNumber, is(number)) ;
+            assertThat(actualStartDate, is(startDate)) ;
+            assertThat(actualEndDate, is(endDate)) ;
+            assertThat(actualCvv, is(cvv)) ;
+
+            AppHelper.driver.findElementById("home").click();
         });
 
         Then("^there is a new login note which the url is \"([^\"]*)\", the login account is \"([^\"]*)\" and the password is \"([^\"]*)\" in the sealnote$", (String url, String acc, String pwd) -> {
             AppHelper.driver.findElement(By.id("card_main_layout")).click();
             AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             assertThat(AppHelper.driver.findElement(By.id("note_login_url")).getText(), is(url));
+            assertThat(AppHelper.driver.findElement(By.id("note_login_name")).getText(), is(acc));
+            assertThat(AppHelper.driver.findElement(By.id("note_login_password")).getText(), is(pwd));
+
+            AppHelper.driver.findElementById("home").click();
         });
 
-
+        Then("^there is no new note in the sealnote$", () -> {
+            assertThat( AppHelper.driver.findElementById("cardcontent_note").getText().equals(""), is(false)) ;
+        });
 
     }
 }
