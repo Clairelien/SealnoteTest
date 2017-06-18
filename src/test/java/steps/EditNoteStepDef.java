@@ -7,6 +7,9 @@ import support.AppHelper;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 /**
  * Created by Claire on 2017/6/16.
  */
@@ -20,9 +23,9 @@ public class EditNoteStepDef implements En {
         When("^user edit this note and save$", () -> {
             AppHelper.driver.findElement(By.id("action_save_note")).click();
         });
-        Then("^user can see the title of this note is \"([^\"]*)\"$", (String arg0) -> {
-            // Write code here that turns the phrase above into concrete actions
-            throw new PendingException();
+        Then("^user can see the title of this note is \"([^\"]*)\"$", (String newTitle) -> {
+            String actualTitle = AppHelper.driver.findElement(By.id("card_header_inner_simple_title")).getText() ;
+            assertThat(actualTitle, is(newTitle));
         });
     }
 }

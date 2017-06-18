@@ -19,9 +19,8 @@ public class DeleteTagStepDef implements En {
             AppHelper.driver.findElementById("button1").click();
         });
         Then("^there is no tag \"([^\"]*)\" in the tag list$", (String tag) -> {
-//            assertThat(AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='"+tag+"']")).isDisplayed(), is(false)) ;
-//            String str = AppHelper.driver.findElementByXPath("//android.widget.TextView[@Text='No tags found!']").getText() ;
-//            assertThat(str, is("No tags found!")) ;
+            String str = AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='No tags found!']")).getText();
+            assertThat(str.compareTo("No tags found!"), is(0));
         });
     }
 }

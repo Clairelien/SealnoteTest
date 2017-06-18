@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SealNoteTest.iml" filepath="$PROJECT_DIR$/SealNoteTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stvProject.iml" filepath="$PROJECT_DIR$/stvProject.iml" />
     </modules>
   </component>
 </project>
