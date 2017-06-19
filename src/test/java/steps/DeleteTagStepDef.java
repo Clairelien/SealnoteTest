@@ -45,13 +45,6 @@ public class DeleteTagStepDef implements En {
             action.longPress( AppHelper.driver.findElementById("card_main_layout") ).release().perform() ;
             AppHelper.driver.findElementById("action_delete").click();
         });
-//        When("^user delete the tag$", () -> {
-//            AppHelper.driver.findElementById("delete_button").click();
-//            AppHelper.driver.findElementById("button1").click();
-//        });
-//        Then("^there is no tag \"([^\"]*)\" in the tag list$", (String tag) -> {
-//            String str = AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='No tags found!']")).getText();
-//            assertThat(str.compareTo("No tags found!"), is(0));
-//        });
+
     }
 }

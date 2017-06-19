@@ -44,12 +44,22 @@ public class DeleteNoteStepDef implements En {
             AppHelper.driver.findElement(By.id("android:id/action_bar_title")).click();
             AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Trash']")).click();
-            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//            assertThat( AppHelper.driver.findElementByXPath("//android.widget.AbsListView/android.widget.LinearLayout[@index='0']//android.widget.TextView[@resource-id='card_header_inner_simple_title']").getText(), is("test2") );
-//            assertThat( AppHelper.driver.findElementByXPath("//android.widget.AbsListView/android.widget.LinearLayout[@index='1']//android.widget.TextView[@resource-id='card_header_inner_simple_title']").getText(), is("test") );
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            assertThat( AppHelper.driver.findElementByXPath("//android.widget.TextView[@text='test2']").getText(), is("test2") );
+            assertThat( AppHelper.driver.findElementByXPath("//android.widget.TextView[@text='test']").getText(), is("test") );
+            assertThat( AppHelper.driver.findElementByXPath("//android.widget.TextView[@text='hello']").getText(), is("hello") );
+            assertThat( AppHelper.driver.findElementByXPath("//android.widget.TextView[@text='hello2']").getText(), is("hello2") );
 
             AppHelper.driver.findElement(By.id("home")).click();
-            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Notes']")).click();
         });
         Given("^user create text note$", () -> {
@@ -73,14 +83,22 @@ public class DeleteNoteStepDef implements En {
             assertThat( AppHelper.driver.findElementById("card_header_inner_simple_title").getText(), is("test") );
 
             AppHelper.driver.findElement(By.id("home")).click();
-            AppHelper.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//            AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Notes']")).click();
-            AppHelper.driver.findElement(By.xpath("//android.widget.ListView[@resource-id='drawer_list']/android.widget.LinearLayout[@index='0']")).click();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            AppHelper.driver.findElement(By.xpath("//android.widget.TextView[@text='Notes']")).click();
         });
         When("^user delete this note in the edit page$", () -> {
             AppHelper.driver.findElementById("card_main_layout").click();
             AppHelper.driver.findElement(By.xpath("//android.widget.ImageButton[@content-desc='More options']")).click();
-            AppHelper.driver.findElementByXPath("android.widget.TextView[@text='Delete']").click();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            AppHelper.driver.findElementByXPath("//android.widget.TextView[@text='Delete']").click();
         });
 
     }
